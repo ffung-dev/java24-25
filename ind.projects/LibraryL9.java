@@ -2,6 +2,7 @@
 // LibraryL9.java       Author: Fiona Fung
 //
 // Using stuff I've learned so far :)
+// includes arrays, if/else
 //*****************************************************
 
 public class LibraryL9
