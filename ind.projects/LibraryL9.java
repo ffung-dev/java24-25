@@ -19,8 +19,9 @@ public class LibraryL9
    double[] fbS = {5.0, 4.95, 5.0, 4.5}; // ARRAY of favorite book rankings
    
    String s1 = "this time it's real", s2 = "you've reached sam", s3 = "today, tonight, tomorrow"; // shopping cart TITLES
-   double s1$ = 12.99, s2$ = 11.24, s3$ = 8.49; // shopping cart PRICES
-   
+   // double s1$ = 12.99, s2$ = 11.24, s3$ = 8.49; // shopping cart PRICES
+   double[] shopPrice = {12.99, 11.24, 8.49}; // shopping cart PRICES
+
    System.out.println ("\tLibrary: " + libraryName);
    System.out.println ("\tBook Count: " + bookCount);
     
@@ -33,7 +34,7 @@ public class LibraryL9
       System.out.println ("\tgood evening~");
    }
    
-   System.out.println ("----------------------------------");
+   System.out.println ("---------------------------------------");
    
    System.out.println ("Current read: " + currentRead + " by " + crAuthor);
    System.out.println ("Last read: " + recentRead + " by " + rrAuthor);
@@ -54,11 +55,12 @@ public class LibraryL9
    
    System.out.println ("\tAverage rating: " + averageFB);
    
-   System.out.println ("----------------------------------");
+   System.out.println ("---------------------------------------");
    
    System.out.println ("\t --- Shopping cart ---");
-   
-   
+   System.out.println (s1 + " - $" + shopPrice[0]);
+   System.out.println (s2 + " - $" + shopPrice[1]);
+   System.out.println (s3 + " - $" + shopPrice[2]);
  
    }
 }
