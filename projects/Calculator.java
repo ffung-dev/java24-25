@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-package java24-25.projects;
-
-=======
->>>>>>> 0e1995749f40d14da1d929453abe38c927781025
 //*******************************************************
 // Calculator.java            Author: Fiona Fung
 //
@@ -81,8 +76,4 @@ public class Calculator // creates class
       } // closing bracket for while statement
       
      }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 0e1995749f40d14da1d929453abe38c927781025
