@@ -24,8 +24,8 @@ public class Lesson12c
    
    if (startsU == 'U') {
       if (length > 6) {
-            System.out.println ("Thank you! (> . <)");
-            System.out.println ("\nYour username: " + userName);
+         System.out.println ("Thank you! (> . <)");
+         System.out.println ("\nYour username: " + userName);
       } else {
          System.out.println ("Error: Username is not more than 6 characters");
       }
