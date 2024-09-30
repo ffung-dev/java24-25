@@ -74,6 +74,7 @@ public class Calculator // creates class
          System.out.println ("- - - - - - - - - - - - -");
          
       } // closing bracket for while statement
-      
+      input.close();
+
      }
 }
