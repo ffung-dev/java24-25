@@ -10,6 +10,7 @@ public class GuessTheNumber
 {
    public static void main (String[] args)
    {
+    // CREATING VARIABLES, USING UTILITIES 
    Random generator = new Random(); // creates random generator
    Scanner input = new Scanner(System.in); // scanner for user input
    
