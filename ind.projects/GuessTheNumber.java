@@ -2,6 +2,7 @@
 // GuessTheNumber.java        Author: Fiona Fung
 //
 // a game where the player tries to guess a number
+// created september 30, 2024
 //***************************************************
 
 import java.util.*; // scanner, random
