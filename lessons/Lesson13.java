@@ -50,8 +50,11 @@ public class Lesson13
          System.out.println("Your letter grade: " + grade);
       }     
 
-      System.out.print("\t0 = yes\n\t1 = no\nCalculate again?");
+      System.out.print("\t0 = yes\n\t1 = no\nCalculate again? ");
       again = input.nextInt();
+      if (again < 0 || again > 1) {
+        System.out.println ("Error: did not choose an option (0/1) = automatic close");
+      }
       
 
    }      
