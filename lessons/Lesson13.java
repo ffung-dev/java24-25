@@ -1,7 +1,7 @@
 //****************************************************
 // Lesson13.java             Author: Fiona Fung
 //
-// calculates grade based on a numerical input
+// calculates grade based on a numerical input :)
 //****************************************************
 
 import java.util.*;
@@ -58,7 +58,7 @@ public class Lesson13
       
 
    }      
-
    input.close();
+   
   }
 }
