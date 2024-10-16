@@ -39,6 +39,7 @@ public class MenuL12
       menuList(drink[0], 2.29);
       menuList(drink[1], 2.10);
       menuList(drink[2], 2.10);
+      menuList(drink[4], 2.29);
    }  
    
    public static void main (String[] args)
