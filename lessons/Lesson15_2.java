@@ -1,11 +1,11 @@
 //********************************************
-// Lesson15b.java       Author: Fiona Fung
+// Lesson15_2.java       Author: Fiona Fung
 //
 // printing a star
 //********************************************
 
 
-public class Lesson15b {
+public class Lesson15_2 {
     public static void main (String[] args) 
     {
          int topPos=0;
