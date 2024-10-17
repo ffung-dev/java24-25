@@ -1,10 +1,10 @@
 //****************************************************
-// Lesson15a.java       Author: Fiona Fung
+// Lesson15_1.java       Author: Fiona Fung
 //
 // using for, while, and do-while loops to print numbers
 //****************************************************
 
-public class Lesson15a 
+public class Lesson15_1 
 {
    public static void main (String[] args) 
    {

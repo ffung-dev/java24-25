@@ -1,34 +1,31 @@
-//********************************************
-// Lesson15b.java       Author: Fiona Fung
+//**************************************************************
+// Lesson15b.java          Author: Fiona Fung
 //
-// printing a star
-//********************************************
+// creating and using methods
+//**************************************************************
 
+import java.util.*;
 
-public class Lesson15b {
-    public static void main (String[] args) 
-    {
-         int topPos=0;
-         int bottomPos=8;
-         int row = 0;
-         int col = 0;
-
-        for (col = 0; col < 9; col++)
-        {
-            for (row = 0; row < 9; row++) 
-            {
-                if (row == topPos || row == bottomPos || row == 4 || col == 4)
-                {
-                    System.out.print(" * ");
-                } else {
-                    System.out.print("   ");
-                }                
-            }
-            System.out.println("");
-            topPos++;
-            bottomPos--;
-        }
-    
-        
-    }
+public class Lesson15b 
+{
+   public static void main (String[] args)
+   {
+      Scanner input = new Scanner (System.in);
+      System.out.println("1.  sum of values between two numbers (inclusive)");
+      System.out.println(sumOfValues(1,3));
+   }
+   
+   public static int sumOfValues(int i, int j)
+   {
+   // a method that returns sum of the values between i and j
+      int sum = 0; // intialize by giving value
+      for (int num = i ; num <= j; num++) 
+      {
+         // DEBUG MESSAGE: System.out.println("Debug:num = " + num);
+         sum = sum + num; // takes value of sum and ADDS to it
+      }
+      return sum;
+      
+   }
+   
 }
