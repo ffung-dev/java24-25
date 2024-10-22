@@ -1,7 +1,7 @@
 //**************************************************************
 // Lesson15b.java          Author: Fiona Fung
 //
-// creating and using methods
+// creating and using methods: sumOfValues & isPrime
 //**************************************************************
 
 import java.util.*;
@@ -19,9 +19,9 @@ public class Lesson15b
 
       while (tryAgain == 0) // as long as the user inputs 0 to try again
       {
-        System.out.println("1. sum of values between two numbers (inclusive)\n2. check if an integer is a prime number");
+        System.out.println("1. sum of values between two numbers (inclusive)\n2. check if an integer is a prime number\n3. check if an integer is a semiprime number");
         System.out.println(divider);
-        System.out.print("Pick an option: (1 / 2): ");
+        System.out.print("Pick an option:  ");
         option = input.nextInt(); // takes the number that the user inputs > code to run
 
         if (option == 1) // sumOfValues
@@ -45,24 +45,42 @@ public class Lesson15b
                     System.out.println("Second number: " + sumNum2);
                 }
             } while (sumNum1 >= sumNum2); // will repeat if numbers do not meet requirements
-
             System.out.println("The sum of values (inclusive) between " + sumNum1 + " and " + sumNum2 + " is " + sumOfValues(sumNum1,sumNum2)); // using first method!
+
         } else if (option == 2) { // isPrime
-            int number;
+            int numberPrime;
             boolean isPrimeNum;
             System.out.println(divider);
             System.out.println("2. check if an integer is a prime number");
             System.out.print("Input a number: ");
-            number = input.nextInt(); // takes user input
+            numberPrime = input.nextInt(); // takes user input
 
-            isPrimeNum = isPrime(number); 
+            isPrimeNum = isPrime(numberPrime); 
             if (isPrimeNum)
             {
-                System.out.println(number + " is a prime number.");
+                System.out.println(numberPrime + " is a prime number.");
             } else {
-                System.out.println(number + " is not a prime number.");
+                System.out.println(numberPrime + " is not a prime number.");
             }
             System.out.println("isPrimeNum: " + isPrimeNum);
+
+        } else if (option == 3) { // isSemiPrime
+            int numberSemiPrime;
+            boolean isSemiPrime;
+            System.out.println(divider);
+            System.out.println("3. check if an integer is a semiprime number");
+            System.out.print("Input a number: ");
+            numberSemiPrime = input.nextInt();
+
+            isSemiPrime = isSemiPrime(numberSemiPrime);
+            if (isSemiPrime)
+            {
+                System.out.println(numberSemiPrime + " is a semiprime number.");
+            } else {
+                System.out.println(numberSemiPrime + " is not a semiprime number.");
+            }
+        } else {
+            System.out.println("Error: did not input a valid option");
         }
         System.out.println(divider);
         // asks if the user wants to run code again
@@ -73,6 +91,7 @@ public class Lesson15b
     }
        input.close();
    }
+
 
    public static int sumOfValues(int i, int j) 
    {
@@ -86,6 +105,7 @@ public class Lesson15b
       return sum; 
       
    }
+
 
    public static boolean isPrime (int n) 
    {
@@ -111,5 +131,26 @@ public class Lesson15b
       //System.out.println("Debug:isPrime = " + isPrime);
       return isPrime;      
       
+   }
+
+   
+   public static boolean isSemiPrime(int n) 
+   {
+      int i;
+      
+      // loop through all possible factors excluding 1 and itself ; 
+      for (i = n - 1 ; i > 1 ; i--)
+         // number of prime factors
+      {
+
+         int quotient = n / i ; // other factor 
+         // DEBUG System.out.println(iPrime);
+         if ((n % i == 0) && (isPrime(i)) && isPrime(quotient)) // i must be factor and prime, and checking that the corresponding factor is also prime
+         {
+            return true; // n is semiprime 
+         }
+         //DEBUG System.out.println(factor + " " + i );
+      }
+      return false ; // else
    }
 }
