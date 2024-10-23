@@ -19,7 +19,13 @@ public class Lesson15b
 
       while (tryAgain == 0) // as long as the user inputs 0 to try again
       {
-        System.out.println("1. sum of values between two numbers (inclusive)\n2. check if an integer is a prime number\n3. check if an integer is a semiprime number");
+        System.out.println("1. sum of values between two numbers (inclusive)3. check if an integer is a semiprime number");
+        System.out.println("2. check if an integer is a prime number");
+        System.out.println("3. check if an integer is a semiprime number");
+        System.out.println("4. check if an integer is a twin prime number");
+        System.out.println("5. check if an integer is a Chen prime number");
+        System.out.println("6. check if an integer is a cousin prime number");
+        
         System.out.println(divider);
         System.out.print("Pick an option:  ");
         option = input.nextInt(); // takes the number that the user inputs > code to run
@@ -79,9 +85,82 @@ public class Lesson15b
             } else {
                 System.out.println(numberSemiPrime + " is not a semiprime number.");
             }
-        } else {
+            
+        } else if (option == 4) { // isTwinPrime
+          // 0 = n is not prime
+          // 1 = n is a prime number but is not a twin prime
+          // 2 = n is a twin prime number
+            int isTwinPrime;
+            int numberTwinPrime;
+            System.out.println(divider);
+            System.out.println("4. check if an integer is a twin prime number");
+            System.out.print("Input a number: ");
+            numberTwinPrime = input.nextInt();
+            
+            isTwinPrime = isTwinPrime(numberTwinPrime);
+            
+            if (isTwinPrime == 0) { // n is not prime
+               System.out.println(numberTwinPrime + " is not a prime number, so it is not a twin prime number.");
+            } else if (isTwinPrime == 1) { // n is prime but not a twin prime
+               System.out.println(numberTwinPrime + " is a prime number, but is not a twin prime number.");
+            } else if (isTwinPrime == 2) { // n is a twin prime
+               System.out.println(numberTwinPrime + " is a twin prime number.");
+            } else { // error
+               System.out.println("ERROR");
+            }
+            
+         } else if (option == 5) { // isChenPrime
+         // 0 = p is not prime
+         // 1 = p is prime but not a chen prime
+         // 2 = p is a chen prime
+             int isChenPrime;
+             int numberChenPrime;
+             System.out.println(divider);
+             System.out.println("5. check if an integer is a Chen prime number");
+             System.out.print("Input a number: ");
+             numberChenPrime = input.nextInt();
+             
+             isChenPrime = isChenPrime(numberChenPrime);
+             
+             if (isChenPrime == 0) 
+             { // n is not prime
+                System.out.println(numberChenPrime + " is not a prime number, so it is not a Chen prime number.");
+             } else if (isChenPrime == 1) { // n is prime but not a chen prime
+                System.out.println(numberChenPrime + " is a prime number, but is not a Chen prime number.");
+             } else if (isChenPrime == 2) { // n is a chen prime
+                System.out.println(numberChenPrime + " is a Chen prime number.");
+             } else { // error
+                System.out.println("ERROR");
+             }
+
+         } else if (option == 6) {// isCousinPrime
+             // 0 = p is not prime
+             // 1 = p is prime but not a cousin prime
+             // 2 = p is a cousin prime
+            int isCousinPrime;
+            int numberCousinPrime;
+            System.out.println(divider);
+             System.out.println("6. check if an integer is a cousin prime number");
+             System.out.print("Input a number: ");
+             numberCousinPrime = input.nextInt();
+             
+             isCousinPrime = isCousinPrime(numberCousinPrime);
+             
+             if (isCousinPrime == 0) 
+             { // n is not prime
+                System.out.println(numberCousinPrime + " is not a prime number, so it is not a cousin prime number.");
+             } else if (isCousinPrime == 1) { // n is prime but not a cousin prime
+                System.out.println(numberCousinPrime + " is a prime number, but is not a cousin prime number.");
+             } else if (isCousinPrime == 2) { // n is a cousin prime
+                System.out.println(numberCousinPrime + " is a cousin prime number.");
+             } else { // error
+                System.out.println("ERROR");
+             }
+
+         } else {
             System.out.println("Error: did not input a valid option");
         }
+        
         System.out.println(divider);
         // asks if the user wants to run code again
         System.out.println("0. yes\n1. no"); 
@@ -142,7 +221,6 @@ public class Lesson15b
       for (i = n - 1 ; i > 1 ; i--)
          // number of prime factors
       {
-
          int quotient = n / i ; // other factor 
          // DEBUG System.out.println(iPrime);
          if ((n % i == 0) && (isPrime(i)) && isPrime(quotient)) // i must be factor and prime, and checking that the corresponding factor is also prime
@@ -152,5 +230,78 @@ public class Lesson15b
          //DEBUG System.out.println(factor + " " + i );
       }
       return false ; // else
+   }
+   
+   public static int isTwinPrime (int n)
+      // twin prime: a prime number that is 2 more or 2 less than another prime number
+      // 0 = n is not prime
+      // 1 = n is a prime number but is not a twin prime
+      // 2 = n is a twin prime number
+   {
+      int isTwinPrime; 
+      
+      if (isPrime(n)) // n IS PRIME
+      {
+         if ((isPrime((n - 2))) || (isPrime((n + 2))))
+         {
+            isTwinPrime = 2; // twin prime
+         } else {
+            isTwinPrime = 1; // not twin prime
+         }
+      } else {
+         isTwinPrime = 0; // not a prime number or a twin prime number
+      }
+      
+      return isTwinPrime;
+   }
+   
+   public static int isChenPrime (int p)
+    // chen prime: a prime number p that p + 2 is a prime number OR a semiprime number
+    // 0 = p is not prime
+    // 1 = p is prime but not a chen prime
+    // 2 = p is a chen prime
+   {
+      int isChenPrime;
+      
+      if (isPrime(p)) 
+      {
+         int p2 = (p + 2);
+         
+         if ((isPrime(p2)) || (isSemiPrime(p2)))
+         {
+            isChenPrime = 2; // p is a chen prime
+         } else {
+            isChenPrime = 1; // prime number but not a chen prime
+         }
+      
+      } else {
+         isChenPrime = 0; // not a prime number, so not a chen prime
+      }
+      
+      return isChenPrime;
+   }
+   
+   public static int isCousinPrime (int p)
+    // cousin prime: a prime number p that p + 4 is a prime number (prime numbers that differ by 4)
+    // 0 = p is not prime
+    // 1 = p is prime but not a cousin prime
+    // 2 = p is a cousin prime
+   {
+      int p2 = (p + 4);
+      int isCousinPrime;
+      
+      if (isPrime(p)) 
+      {
+         if (isPrime(p2))
+         {
+            isCousinPrime = 2; // p is prime and cousin prime
+         } else {
+            isCousinPrime = 1; // p is prime but not a cousin prime
+         }
+      } else {
+         isCousinPrime = 0; // p is not prime so it cannot be a cousin prime
+      }
+      
+      return isCousinPrime;
    }
 }
