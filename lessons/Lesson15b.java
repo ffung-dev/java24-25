@@ -25,6 +25,8 @@ public class Lesson15b
         System.out.println("4. check if an integer is a twin prime number");
         System.out.println("5. check if an integer is a Chen prime number");
         System.out.println("6. check if an integer is a cousin prime number");
+        System.out.println("7. check if three integers are a prime triplet");
+        System.out.println("8. check if four integers are a prime quadruplet");
         
         System.out.println(divider);
         System.out.print("Pick an option:  ");
@@ -303,5 +305,54 @@ public class Lesson15b
       }
       
       return isCousinPrime;
+   }
+
+   public static int isTripletPrime (int a, int b, int c)
+     // triplet prime : three consecutive primes such that the first and the last differ by six
+   {
+     // 0 = not all 3 numbers are prime, so they are not a set of triplet prime numbers
+     // 1 = the 3 numbers are prime, but not consecutive, so they are not a set of triplet prime numbers
+     // 2 = the 3 numbers are a set of triplet prime numbers
+     // 3 = the 3 are prime and a<b<c, but they are not a set of triplet prime numbers
+      int isTripletPrime = 0;
+      if (isPrime(a) && isPrime(b) && isPrime(c)) // check that all 3 num are prime
+      {
+         if ( (a < b) && (b < c) ) // a < b < c
+         {
+            if ((c - a == 6)) // triplet prime? 
+            {
+               isTripletPrime = 2; // the 3 numbers are triplet primes
+            } else {
+               isTripletPrime = 3; // prime and a < b < c, but not triplet primes
+            }
+         } else { // if not consecutive
+            isTripletPrime = 1;
+         }
+      } else { // not all numbers are prime > not a prime triplet
+         isTripletPrime = 0;
+      }
+      return isTripletPrime;
+   }
+   
+   public static int isQuadrupletPrime (int a, int b, int c, int d)
+     // a set of four prime numbers of the form {p, p + 2, p + 6, p + 8}
+     // 0 = the 4 numbers are not all prime
+     // 1 = the 4 numbers are prime but they are not a prime quadruplet
+     // 2 = the 4 numbers are a prime quadruplet
+   {
+      int isQuadrupletPrime = 0;
+      if (isPrime(a) && isPrime(b) && isPrime(c) && isPrime(d))
+      {
+         if ((b == a + 2) && (c == a + 6) && (d == a + 8))
+         {
+            isQuadrupletPrime = 2; // the set of numbers is a prime quadruplet
+         } else {
+            isQuadrupletPrime = 1; // the set of numbers is prime but not a prime quadruplet
+         }
+      } else { // not all 4 numbers are prime numbers, so they are not a prime quadruplet
+         isQuadrupletPrime = 0;
+      }
+      
+      return isQuadrupletPrime;
    }
 }
