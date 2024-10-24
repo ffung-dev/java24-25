@@ -135,30 +135,88 @@ public class Lesson15b
                 System.out.println("ERROR");
              }
 
-         } else if (option == 6) {// isCousinPrime
-             // 0 = p is not prime
-             // 1 = p is prime but not a cousin prime
-             // 2 = p is a cousin prime
+         } else if (option == 6) { // isCousinPrime
+            // 0 = p is not prime
+            // 1 = p is prime but not a cousin prime
+            // 2 = p is a cousin prime
             int isCousinPrime;
             int numberCousinPrime;
             System.out.println(divider);
-             System.out.println("6. check if an integer is a cousin prime number");
-             System.out.print("Input a number: ");
-             numberCousinPrime = input.nextInt();
+            System.out.println("6. check if an integer is a cousin prime number");
+            System.out.print("Input a number: ");
+            numberCousinPrime = input.nextInt();
              
-             isCousinPrime = isCousinPrime(numberCousinPrime);
+            isCousinPrime = isCousinPrime(numberCousinPrime);
              
-             if (isCousinPrime == 0) 
-             { // n is not prime
-                System.out.println(numberCousinPrime + " is not a prime number, so it is not a cousin prime number.");
-             } else if (isCousinPrime == 1) { // n is prime but not a cousin prime
-                System.out.println(numberCousinPrime + " is a prime number, but is not a cousin prime number.");
-             } else if (isCousinPrime == 2) { // n is a cousin prime
-                System.out.println(numberCousinPrime + " is a cousin prime number.");
-             } else { // error
-                System.out.println("ERROR");
-             }
+            if (isCousinPrime == 0) 
+            { // n is not prime
+             System.out.println(numberCousinPrime + " is not a prime number, so it is not a cousin prime number.");
+          } else if (isCousinPrime == 1) { // n is prime but not a cousin prime
+             System.out.println(numberCousinPrime + " is a prime number, but is not a cousin prime number.");
+          } else if (isCousinPrime == 2) { // n is a cousin prime
+             System.out.println(numberCousinPrime + " is a cousin prime number.");
+          } else { // error
+             System.out.println("ERROR");
+          }
+         
+         } else if (option == 7) { //isTripletPrime 
+            // 0 = not all 3 numbers are prime, so they are not a set of triplet prime numbers
+            // 1 = the 3 numbers are prime, but not consecutive, so they are not a set of triplet prime numbers
+            // 2 = the 3 numbers are a set of triplet prime numbers
+            // 3 = the 3 are prime and a<b<c, but they are not a set of triplet prime numbers
+            int isTripletPrime;
+            int numTriplet1, numTriplet2, numTriplet3;
+            System.out.println(divider);
+            System.out.println("7. check if three integers are a prime triplet");
 
+            System.out.print("Input the first number: ");
+            numTriplet1 = input.nextInt();
+            System.out.print("Input the second number: ");
+            numTriplet2 = input.nextInt();
+            System.out.print("Input the third number: ");
+            numTriplet3 = input.nextInt();
+
+            isTripletPrime = isTripletPrime(numTriplet1, numTriplet2, numTriplet3);
+            if (isTripletPrime == 0)
+            {
+               System.out.println(numTriplet1 + ", " + numTriplet2 + ", and " + numTriplet3 + " are not all prime numbers, so they are not a prime triplet.");
+            } else if (isTripletPrime == 1) {
+               System.out.println(numTriplet1 + ", " + numTriplet2 + ", and " + numTriplet3 + " are prime but not consecutive, so they are not a prime triplet.");
+            } else if (isTripletPrime == 2) {
+               System.out.println(numTriplet1 + ", " + numTriplet2 + ", and " + numTriplet3 + " are a prime triplet.");
+            } else if (isTripletPrime == 3) {
+               System.out.println(numTriplet1 + ", " + numTriplet2 + ", and " + numTriplet3 + " are prime numbers, but they are not a prime triplet.");
+            } else {
+               System.out.println("ERROR");
+            }
+         } else if (option == 8) { //isQuadrupletPrime
+            // 0 = the 4 numbers are not all prime
+            // 1 = the 4 numbers are prime but they are not a prime quadruplet
+            // 2 = the 4 numbers are a prime quadruplet
+            int isQuadrupletPrime;
+            int numQuad1, numQuad2, numQuad3, numQuad4;
+            System.out.println(divider);
+            System.out.println("8. check if four integers are a prime quadruplet");
+
+            System.out.print("Input the first number: ");
+            numQuad1 = input.nextInt();
+            System.out.print("Input the second number: ");
+            numQuad2 = input.nextInt();
+            System.out.print("Input the third number: ");
+            numQuad3 = input.nextInt();
+            System.out.print("Input the fourth number: ");
+            numQuad4 = input.nextInt();
+
+            isQuadrupletPrime = isQuadrupletPrime(numQuad1, numQuad2, numQuad3, numQuad4);
+            if (isQuadrupletPrime == 0) {
+               System.out.println(numQuad1 + ", " + numQuad2 + ", " + numQuad3 + ", and " + numQuad4 + " are not all prime numbers, so they are not a prime quadruplet.");
+            } else if (isQuadrupletPrime == 1) {
+               System.out.println(numQuad1 + ", " + numQuad2 + ", " + numQuad3 + ", and " + numQuad4 + " are prime numbers, but they are not a prime quadruplet.");
+            } else if (isQuadrupletPrime == 2) {
+               System.out.println(numQuad1 + ", " + numQuad2 + ", " + numQuad3 + ", and " + numQuad4 + " are a prime quadruplet.");
+            } else {
+               System.out.println("ERROR");
+            }
          } else {
             System.out.println("Error: did not input a valid option");
         }
