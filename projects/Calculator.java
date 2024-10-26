@@ -26,8 +26,8 @@ public class Calculator // creates class
       Scanner input = new Scanner (System.in); // takes keyboard input
           
    // asks for user inputs and calculates answer 
-      double useAgain = 0; // option to try again
-      while (useAgain == 0) { // will loop calculator unless useAgain = 1 (or not 0)
+      double useAgain = 1; // option to try again
+      while (useAgain == 1) { // will loop calculator unless useAgain = 1 (or not 0)
       // asks for inputs
          System.out.print ("Enter operation #: ");
          option = input.nextInt(); 
@@ -65,7 +65,7 @@ public class Calculator // creates class
          }
          
       // asks if user wants to use calculator again
-         System.out.println ("\n  0 = yes\n  1 = no\nUse calculator again?");
+         System.out.println ("\n  1 = yes\n  0 = no\nUse calculator again?");
          useAgain = input.nextDouble();
          
          if (useAgain < 0 || useAgain > 1) {

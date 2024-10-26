@@ -16,13 +16,13 @@ public class GuessTheNumber
    Scanner input = new Scanner(System.in); // scanner for user input
    
    int range1 = 0, range2 = 100, answer; // default range: 0-100
-   int again = 0; // for repeating the game
+   int again = 1; // for repeating the game
    int guess; // the user's input guess
    
    System.out.println("Let's play a number guessing game!");
    
    // USER INPUTS RANGE, COMPUTER PICKS A RANDOM NUMBER, USER GUESSES
-   while (again == 0) {  // while playing again is true
+   while (again == 1) {  // while playing again is true
 
     // user enters the range
       System.out.print ("Enter the first range number: ");
@@ -59,8 +59,8 @@ public class GuessTheNumber
     } else {
         System.out.println("Error: the first range must be less than the second range.");
         System.out.println ("- - - - - - - - - - - - - - -");
-        System.out.print ("\t0 = yes\n\t1 = no\nTry again? "); 
-        again = input.nextInt(); // if 0 = repeat, else stop
+        System.out.print ("\t1 = yes\n\t0 = no\nTry again? "); 
+        again = input.nextInt(); // if 1 = repeat, else stop
         if (again != 0 && again != 1) {
             System.out.println("Error: you did not enter one of the options; automatic close");      
         }
