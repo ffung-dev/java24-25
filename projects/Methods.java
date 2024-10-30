@@ -185,6 +185,7 @@ public class Methods
       input.close();
    }
    
+   
    public static int factorial (int n)
    // option 1: factorial (returns the product n * (n – 1) * … * 2 * 1)
    {
@@ -198,6 +199,7 @@ public class Methods
       
       return product;
    }
+   
     
    public static int sumOfDigits (int n)
    // option 2: takes a nonnegative integer as a parameter and returns the sum of its digits
@@ -211,6 +213,7 @@ public class Methods
       
       return sum; // returns sum of digits
    }
+   
    
    public static boolean isPerfect (int n)
    // option 3: takes a nonnegative integer and returns true if the number is a perfect number; false otherwise
@@ -255,22 +258,28 @@ public class Methods
       average = (double)sum/(double)digits;
       return average;
    }
+   
+   
    public static boolean hasMidpoint(int a, int b, int c)
    // takes three integers as parameters and returns true if the average of any two of them is the third
    {
       boolean hasMidpoint;
+      double a1 = a, b1 = b, c1 = c;
+      double average1 = (a1 + b1)/2;
+      double average2 = (b1 + c1)/2;
+      double average3 = (a1 + c1)/2;
       
       // check for all instances (3)
-      if (((a+b)/2) == c) // if average of 2 nums = third num
+      if (average1 == c1) // if average of 2 nums = third num
       {
          hasMidpoint = true;
-         // DEBUG: System.out.println("DEBUG: a+b/2 = c");
-      } else if (((b+c)/2) == a) {
+         // DEBUG: System.out.println(average1 + "DEBUG: a+b/2 = c");
+      } else if (average2 == a1) {
          hasMidpoint = true; 
-         // DEBUG: System.out.println("DEBUG: b+c/2 = a");
-      } else if (((a+c)/2) == b) {
+         // DEBUG: System.out.println(average2 + "DEBUG: b+c/2 = a");
+      } else if (average3 == b1) {
          hasMidpoint = true; 
-         // DEBUG: System.out.println("DEBUG: a+c/2 = b");
+         // DEBUG: System.out.println(average3 + "DEBUG: a+c/2 = b");
       } else {
          hasMidpoint = false;
       }
