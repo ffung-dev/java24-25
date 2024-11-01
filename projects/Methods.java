@@ -4,7 +4,8 @@
 // mini-project: using and creating methods (5)
 //*********************************************
 
-import java.util.*;
+import java.util.Scanner;
+// import util such as Scanner
 
 public class Methods
 {
