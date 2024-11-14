@@ -4,7 +4,7 @@
 // encode / decode a phrase through a caesar cipher
 //**********************************************
 
-// copy & paste for test: ABCDEFG HIJK LMNOP QRS TUV WXYZ 
+// copy & paste for test: ABCDEFG HIJK LMNOP QRS TUV WXYZ / abcdefg hijk lmnop qrs tuv wxyz
 
 import java.util.Scanner;
 
@@ -57,7 +57,6 @@ public class CaesarCipher
          System.out.print("Use again? "); 
          useAgain = numInput.nextInt();
       }
-
       // close scanners
       numInput.close();
       stringInput.close();
@@ -74,16 +73,31 @@ public class CaesarCipher
      {
         shift = shift - 26;
      }
-      // i = identifies letter in specific place
+      // i = identifies letter in specific position
       for (int i = 0 ; i < lengthE ; i++) // starts with the first letter and goes down the string until end reached
       {
-         if (str.charAt(i) + shift > 90) // goes past Z?
+         // changes character based on: is it a space? is it a capital letter? is it a lowercase letter?
+         if ((str.charAt(i) > 31 && str.charAt(i) < 65) || (str.charAt(i) > 90 && str.charAt(i) < 97) || (str.charAt(i) > 122 && str.charAt(i) < 127) ) // check if it is a space or punctuation (!, ., #, ", etc)
          {
-            letter = (char)((str.charAt(i) + shift) - 26);   
-         } else if (str.charAt(i) == 32) { // keeps a space the same
-            letter = (char)(32);
+            letter = str.charAt(i) ; // stays the same!  
+         } else if (str.charAt(i) > 64 && str.charAt(i) < 91) { // capital letter
+         
+            if (str.charAt(i) + shift > 90) { // goes past 'Z'? 
+               letter = (char)((str.charAt(i) + shift) - 26);
+            } else { // does not go past 'Z'
+               letter = (char)(str.charAt(i) + shift) ;
+            }
+            
+         } else if (str.charAt(i) > 96 && str.charAt(i) < 123) { // lowercase letter
+         
+            if (str.charAt(i) + shift > 122) // goes past 'z' ?
+            {
+               letter = (char)((str.charAt(i) + shift) - 26);
+            } else { // does not go past 'z'
+               letter = (char)(str.charAt(i) + shift) ; 
+            }
          } else {
-            letter = (char)(str.charAt(i) + shift) ;
+            System.out.println("ERROR: " + str.charAt(i));
          }
          // debug: System.out.println("character at" + i + " and shift is " + shift); 
          resultE = resultE + letter;
@@ -106,18 +120,28 @@ public class CaesarCipher
      }
       for (int i = 0 ; i < lengthD ; i++) // goes down the string
       {
-         if (str.charAt(i) == 32) // check if it is a space
+         if ((str.charAt(i) > 31 && str.charAt(i) < 65) || (str.charAt(i) > 90 && str.charAt(i) < 97) || (str.charAt(i) > 122 && str.charAt(i) < 127) ) // check if it is a space or punctuation (!, ., #, ", etc)
          {
-            letter = (char)(32);
-         } else if  ((str.charAt(i) + (-shift)) < 65)  { // check if it goes before A
-            letter = (char)(str.charAt(i) + (26 - shift));  
-         } else { // doesn't go before A and is not a space
-            letter = (char)(str.charAt(i) - shift);
-         }
+            letter = str.charAt(i) ; // stays the same!
+         } else if (str.charAt(i) > 64 && str.charAt(i) < 91) { // capital letter
+            
+            if ((str.charAt(i) + (-shift)) < 65)  { // check if it goes before 'A'
+               letter = (char)(str.charAt(i) + (26 - shift));  
+            } else { // doesn't go before 'A'
+               letter = (char)(str.charAt(i) - shift);
+            }
+            
+         } else if (str.charAt(i) > 96 && str.charAt(i) < 123) { // lowercase letter
+            
+            if ((str.charAt(i) - shift) < 97) { // goes before 'a' 
+               letter = (char)(str.charAt(i) + (26 - shift)) ;
+            } else { // doesn't go past 'z'
+               letter = (char)(str.charAt(i) - shift) ;
+            }
+         } 
          resultD = resultD + letter; // adds the letter to the new string
       }
       
       return resultD;
    }
-   
 }
