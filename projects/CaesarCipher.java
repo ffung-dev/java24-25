@@ -1,8 +1,10 @@
 //**********************************************
 // CaesarCipher.java      Author: Fiona Fung
 //
-//
+// encode / decode a phrase through a caesar cipher
 //**********************************************
+
+// copy & paste for test: ABCDEFG HIJK LMNOP QRS TUV WXYZ 
 
 import java.util.Scanner;
 
@@ -15,7 +17,6 @@ public class CaesarCipher
       // variables that hold user input
       String strE, strD;
       int shiftE, shiftD;
-      
       int useAgain = 1; // asks the user to try again (1 = yes, = no)
       
       while (useAgain == 1)
@@ -48,7 +49,7 @@ public class CaesarCipher
 
          } else {
          // user did not input a valid option
-         
+            System.out.println("Error: User did not input a valid option.");
          }
          
          System.out.println(divider);
@@ -66,24 +67,24 @@ public class CaesarCipher
       char letter = str.charAt(0);
       final int givenShift = shift;
       
-      if (shift > 25) // 26 resets to 1 
-      {
-         shift = shift - 25;
-      }
+     while (shift > 25) // 26 resets to 1 , etc
+     {
+        shift = shift - 26;
+     }
       // i = identifies letter in specific place
       for (int i = 0 ; i < lengthE ; i++) // starts with the first letter and goes down the string until end reached
       {
-         if ((str.charAt(i) + shift) > 90) // goes past Z (ASCII)
+         if (str.charAt(i) + shift > 90) // goes past Z?
          {
-            shift = -(26 - shift);
-            
-         } else if ((str.charAt(i) + shift) < 65) { // goes before A 
-            shift = givenShift;
+            letter = (char)((str.charAt(i) + shift) - 26);   
+         } else if (str.charAt(i) == 32) { // keeps a space the same
+            letter = (char)(32);
+         } else {
+            letter = (char)(str.charAt(i) + shift) ;
          }
-      
-         letter = (char)(str.charAt(i) + shift) ;
-            
+         // debug: System.out.println("character at" + i + " and shift is " + shift); 
          resultE = resultE + letter;
+         // debug: System.out.println("done " + resultE);
       }    
       
       return resultE;
@@ -97,16 +98,21 @@ public class CaesarCipher
       final int givenShift = shift;
       char letter = str.charAt(0); 
       
-      for (int i = 0 ; i < lengthD ; i++)
+      while (shift > 25) // 26 resets to 1 , etc
+     {
+        shift = shift - 26;
+     }
+      for (int i = 0 ; i < lengthD ; i++) // goes down the string
       {
-         if ((str.charAt(i) + (-shift)) < 65) // goes before A
+         if (str.charAt(i) == 32) // check if it is a space
          {
-            shift = (26 - shift);
-         } else if ((str.charAt(i) + (-shift)) > 90) {
-            shift = -(26 - shift);
+            letter = (char)(32);
+         } else if  ((str.charAt(i) + (-shift)) < 65)  { // check if it goes before A
+            letter = (char)(str.charAt(i) + (26 - shift));  
+         } else { // doesn't go before A and is not a space
+            letter = (char)(str.charAt(i) - shift);
          }
-         letter = (char)(str.charAt(i) + (shift));
-         resultD = resultD + letter;
+         resultD = resultD + letter; // adds the letter to the new string
       }
       
       return resultD;
