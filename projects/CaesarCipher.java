@@ -57,6 +57,10 @@ public class CaesarCipher
          System.out.print("Use again? "); 
          useAgain = numInput.nextInt();
       }
+
+      // close scanners
+      numInput.close();
+      stringInput.close();
    }
    
    public static String encode(String str, int shift)
@@ -65,7 +69,6 @@ public class CaesarCipher
       String resultE = "";
       final int lengthE = str.length(); // keeps length of string (constant)
       char letter = str.charAt(0);
-      final int givenShift = shift;
       
      while (shift > 25) // 26 resets to 1 , etc
      {
@@ -95,7 +98,6 @@ public class CaesarCipher
    {
       String resultD = "";
       final int lengthD = str.length(); // keeps length of string (constant)
-      final int givenShift = shift;
       char letter = str.charAt(0); 
       
       while (shift > 25) // 26 resets to 1 , etc
