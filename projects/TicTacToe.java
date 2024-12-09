@@ -11,11 +11,19 @@ public class TicTacToe
    public static void main (String[] args)
    {
       // in-game variables
-      String[] boardPlace = {"   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ",}; // entire board (0-2: top; 3-5: middle; 6-8: bottom)
+      String[] boardPlace = {"   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   "}; // entire board (0-2: top; 3-5: middle; 6-8: bottom)
       String div = " | ";
       String boardGuide = " 1 " + div + " 2 " + div + " 3 "  + "\n" + " 4 " + div + " 5 " + div + " 6 " + "\n" + " 7 " + div + " 8 " + div + " 9 "; // shown every time a move is made
       String board = boardPlace[0] + div + boardPlace[1] + div + boardPlace[2] + "\n" + boardPlace[3] + div + boardPlace[4] + div + boardPlace[5] + "\n" + boardPlace[6] + div + boardPlace[7] + div + boardPlace[8];
-      
+      String optMenu = "    1 = yes\n    0 = no \n";
+      // 1 = yes
+      // 0 = no
+      Scanner input = new Scanner(System.in);
+      int playAgain = 0;
+      boolean validAgain = true;
+      int keepWins = 0;
+      boolean validKeep = true;
+
       // player variables
       // X = player 1
       // O = player 2
@@ -29,11 +37,24 @@ public class TicTacToe
       String symbol = "   ";
       boolean valid = false; // check if spot is taken or not
       String turn = "player " + player + " : enter your move (1-9)";
-      Scanner input = new Scanner(System.in);
-      int playAgain = 0;
-      // 1 = yes
-      // 0 = no
-      boolean validAgain = true;
+      int[] winCount = { 0 , 0 , 0 , 0 };
+      // winCount[0] = uncounted ; [1] = player 1 ; [2] = player 2 ; [3] = ties
+         
+      do 
+      {
+         System.out.print(optMenu);
+         System.out.print("Would you like to keep track of player wins?  ");
+         keepWins = input.nextInt();
+         if (keepWins != 1 && keepWins != 0)
+            {
+               System.out.println("Error: enter a valid option (1/0)");
+               validKeep = false;
+            } else {
+               validKeep = true;
+            }
+       } while (!validKeep);
+      System.out.println("----------------\n");
+      
       do
       {
          // gameplay :)
@@ -68,6 +89,7 @@ public class TicTacToe
             // 1  |  2  |  3 
             // 4  |  5  |  6 
             // 7  |  8  |  9 
+            
             // is there a winner yet??
             winner = checkWin(boardPlace);
             // 0 = no winner
@@ -97,11 +119,30 @@ public class TicTacToe
                
             }
          } while (winner == 0); // game continues when there is no winner  
+         // score count if keepWins = 1
+         if (keepWins == 1)
+         {
+            System.out.println(" score count ~ ");
+            switch (winner)
+            {
+               case 1 :
+                  winCount[1]++;
+                  break;
+               case 2 : 
+                  winCount[2]++;
+                  break;
+               case 3 :
+                  winCount[3]++;
+                  break;
+            }  
+            System.out.println(" player 1 : " + winCount[1] + "\n player 2 : " + winCount[2] + "\n ties : " + winCount[3]);
+         }
          
+         // asks if user wants to play again
          do
          {
             System.out.println("----------------");
-            System.out.print("    1 = yes\n    0 = no\n  Play again?  ");
+            System.out.print(optMenu + "  Play again?  ");
             playAgain = input.nextInt();
             if (playAgain != 1 && playAgain != 0)
             {
@@ -111,6 +152,10 @@ public class TicTacToe
                validAgain = true;
             }
          } while (!validAgain);
+         System.out.println("----------------");
+         String[] newBoardPlace = {"   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   "}; // resets board after a game
+         boardPlace = newBoardPlace;
+         
       } while (playAgain == 1);
    }
       
