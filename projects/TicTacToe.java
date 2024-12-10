@@ -157,6 +157,8 @@ public class TicTacToe
          boardPlace = newBoardPlace;
          
       } while (playAgain == 1);
+
+      input.close();
    }
       
    
