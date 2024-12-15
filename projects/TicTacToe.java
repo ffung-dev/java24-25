@@ -22,8 +22,12 @@ public class TicTacToe
       int playAgain = 0;
       boolean validAgain = true;
       int keepWins = 0;
-      boolean validKeep = true;
+      boolean validStart = true;
       String lineDiv = ("----------------\n");
+      
+      // player vs computer variables
+      int vsComp = 1; 
+      String compOr2 = (" player 2 ");
       
       // player variables
       // X = player 1
@@ -36,59 +40,98 @@ public class TicTacToe
       int player = 1; // player 1 goes first
       int choice = 0; // choose spot on board
       String symbol = "   ";
-      boolean valid = false; // check if spot is taken or not
-      String turn = "player " + player + " : enter your move (1-9)";
+      boolean openSpot = false; // check if spot is taken or not
+      String turn;
       int[] winCount = { 0 , 0 , 0 , 0 };
       // winCount[0] = uncounted ; [1] = player 1 ; [2] = player 2 ; [3] = ties
          
       do 
+      // keep track of player wins
       {
          System.out.print(optMenu);
-         System.out.print("Would you like to keep track of player wins?  ");
+         System.out.print("Would you like to keep track of scores?  ");
          keepWins = input.nextInt();
          if (keepWins != 1 && keepWins != 0)
-            {
-               System.out.println("Error: enter a valid option (1/0)");
-               validKeep = false;
-            } else {
-               validKeep = true;
-            }
-       } while (!validKeep);
+         {
+            System.out.println("Error: enter a valid option (1/0)\n");
+            validStart = false;
+          } else {
+            validStart = true;
+          }
+      } while (!validStart);
             
       do
+      // gameplay mode
       {
+         System.out.println("\n    1 = two-player\n    0 = versus computer");
+         System.out.print("Choose gameplay mode : ");
+         vsComp = input.nextInt();
+         if (vsComp != 1 && vsComp != 0)
+         {
+            System.out.println("Error: enter a valid option (1/0)");
+            validStart = false;
+         } else {
+            validStart = true;
+         }
+         if (vsComp == 0)
+         {
+            compOr2 = " computer ";
+         } else if (vsComp == 1) {
+            compOr2 = " player 2 ";
+         }
+      } while (!validStart);
+      
+      System.out.print(lineDiv);
+      if (keepWins == 1)
+      {
+         System.out.println("score count: on");
+      } else if (keepWins == 0) {
+         System.out.println("score count: off");
+      }
+      if (vsComp == 1) 
+      {
+         System.out.println("gameplay: two-player");
+      } else if (vsComp == 0) {
+         System.out.println("gameplay: versus computer");
+      }
+      
+      do
+      {  
          // gameplay :)
          System.out.print(lineDiv);
          System.out.println(" tic - tac - toe ");
-         do 
+         
+         do
          {
+            // player vs. player
             System.out.println(lineDiv + boardGuide);
             turn = "player " + player + " : enter your move (1-9)";
-            while (!valid)
+            while (!openSpot)
             {
                System.out.println(turn);
                choice = input.nextInt();
+               // check if the space is valid
                if (choice < 10 && choice > 0) // choice must be 1-9
                {
                   if (boardPlace[choice - 1] == "   ") 
                   {
                   // true if there is a space, false if there is already an X / O there
-                     valid = true;
+                     openSpot = true;
                   } else {
-                     valid = false;
+                     openSpot = false;
                   }
                   
                } else {
-                  valid = false;
+                  openSpot = false;
                }
-               if (!valid) 
+               if (!openSpot) 
                {
                   System.out.println("invalid move!");
                }
-            }    
+            }
            
             symbol = playSymbol(player); // determine which symbol will be placed
-            // DEBUG : System.out.println("valid " + boardPlace[choice - 1] + symbol);
+            // DEBUG : System.out.println("openSpot " + boardPlace[choice - 1] + symbol);
             boardPlace[choice - 1] = symbol;
             // update board
             board = boardPlace[0] + div + boardPlace[1] + div + boardPlace[2] + "\n" + boardPlace[3] + div + boardPlace[4] + div + boardPlace[5] + "\n" + boardPlace[6] + div + boardPlace[7] + div + boardPlace[8];
@@ -96,18 +139,11 @@ public class TicTacToe
             
             // reset / next turn
             player = nextTurn(player);
-            valid = false; 
-            
-            // 1  |  2  |  3 
-            // 4  |  5  |  6 
-            // 7  |  8  |  9 
+            openSpot = false; 
+            // 12/12 : EVERYTHING ABOVE IS ASSUMING THAT PLAYER VS PLAYER IS ON; BELOW CODE IS CHANGED TO COMP OR PLAYER2 ALREADY
             
             // is there a winner yet??
             winner = checkWin(boardPlace);
-            // 0 = no winner
-            // 1 = player 1 wins
-            // 2 = player 2 wins
-            // 3 = tie~
             switch (winner) {
                case 0:
                winner = 0;
@@ -118,7 +154,7 @@ public class TicTacToe
                break;
                
                case 2:
-               System.out.println("game over ~ player 2 wins!");
+               System.out.println("game over ~" + compOr2 + "wins!");
                break;
                
                case 3:
@@ -148,7 +184,7 @@ public class TicTacToe
                   winCount[3]++;
                   break;
             }  
-            System.out.println(" player 1 : " + winCount[1] + "\n player 2 : " + winCount[2] + "\n ties : " + winCount[3]);
+            System.out.println(" player 1 : " + winCount[1] + "\n" + compOr2 + ": " + winCount[2] + "\n ties : " + winCount[3]);
          }
          
          // asks if user wants to play again
@@ -170,7 +206,7 @@ public class TicTacToe
          boardPlace = newBoardPlace;
          
       } while (playAgain == 1);
-
+      
       input.close();
    }
       
