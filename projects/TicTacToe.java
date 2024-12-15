@@ -1,10 +1,11 @@
 //*************************************************************
 //    TicTacToe.java                 Author: Fiona Fung
 //
-//    a two-player game of tic-tac-toe 
+//    a game of tic-tac-toe 
 //*************************************************************
 
 import java.util.Scanner;
+import java.util.Random;
 
 public class TicTacToe
 {
@@ -28,6 +29,7 @@ public class TicTacToe
       // player vs computer variables
       int vsComp = 1; 
       String compOr2 = (" player 2 ");
+      Random compTurn = new Random();
       
       // player variables
       // X = player 1
@@ -103,45 +105,97 @@ public class TicTacToe
          
          do
          {
-            // player vs. player
-            System.out.println(lineDiv + boardGuide);
-            turn = "player " + player + " : enter your move (1-9)";
-            while (!openSpot)
+            if (vsComp == 1)
             {
-               System.out.println(turn);
-               choice = input.nextInt();
-               // check if the space is valid
-               if (choice < 10 && choice > 0) // choice must be 1-9
+               // player vs. player
+               System.out.println(lineDiv + boardGuide);
+               turn = "player " + player + " : enter your move (1-9)";
+               while (!openSpot)
                {
-                  if (boardPlace[choice - 1] == "   ") 
+                  System.out.println(turn);
+                  choice = input.nextInt();
+                  // check if the space is valid
+                  if (choice < 10 && choice > 0) // choice must be 1-9
                   {
-                  // true if there is a space, false if there is already an X / O there
-                     openSpot = true;
+                     if (boardPlace[choice - 1] == "   ") 
+                     {
+                     // true if there is a space, false if there is already an X / O there
+                        openSpot = true;
+                     } else {
+                        openSpot = false;
+                     }
+                     
                   } else {
                      openSpot = false;
                   }
+                  if (!openSpot) 
+                  {
+                     System.out.println("invalid move!");
+                  }
+               }
+            } else if (vsComp == 0) {
+               // player vs. computer
+               System.out.println(lineDiv + boardGuide);
+               if (player == 1)
+               {
+                  // player 1
+                  turn = "player " + player + " : enter your move (1-9)";
+                  while (!openSpot)
+                  {
+                     System.out.println(turn);
+                     choice = input.nextInt();
+                     // check if the space is valid
+                     if (choice < 10 && choice > 0) // choice must be 1-9
+                     {
+                        if (boardPlace[choice - 1] == "   ") 
+                        {
+                        // true if there is a space, false if there is already an X / O there
+                           openSpot = true;
+                        } else {
+                           openSpot = false;
+                        }
+                        
+                     } else {
+                        openSpot = false;
+                     }
+                     if (!openSpot) 
+                     {
+                        System.out.println("invalid move!");
+                     }
+                  }
+
+               } else if (player == 2) {
+                  // computer
+                  turn = "computer is thinking . . .";
+                  System.out.println(turn);
+                  while (!openSpot)
+                  {
+                     choice = compTurn.nextInt(9) + 1;
+                     if (boardPlace[choice - 1] == "   ") 
+                        {
+                        // true if there is a space, false if there is already an X / O there
+                           openSpot = true;
+                        } else {
+                           openSpot = false;
+                        }
+                     
+                  }
                   
                } else {
-                  openSpot = false;
-               }
-               if (!openSpot) 
-               {
-                  System.out.println("invalid move!");
-               }
+                  System.out.println("ERROR IN COMPUTER'S TURN");
+               }            
             }
-           
-            symbol = playSymbol(player); // determine which symbol will be placed
-            // DEBUG : System.out.println("openSpot " + boardPlace[choice - 1] + symbol);
-            boardPlace[choice - 1] = symbol;
-            // update board
-            board = boardPlace[0] + div + boardPlace[1] + div + boardPlace[2] + "\n" + boardPlace[3] + div + boardPlace[4] + div + boardPlace[5] + "\n" + boardPlace[6] + div + boardPlace[7] + div + boardPlace[8];
-            System.out.println(board);
-            
-            // reset / next turn
-            player = nextTurn(player);
-            openSpot = false; 
-            // 12/12 : EVERYTHING ABOVE IS ASSUMING THAT PLAYER VS PLAYER IS ON; BELOW CODE IS CHANGED TO COMP OR PLAYER2 ALREADY
-            
+               symbol = playSymbol(player); // determine which symbol will be placed
+               // DEBUG : System.out.println("openSpot " + boardPlace[choice - 1] + symbol);
+               boardPlace[choice - 1] = symbol;
+               // update board
+               board = boardPlace[0] + div + boardPlace[1] + div + boardPlace[2] + "\n" + boardPlace[3] + div + boardPlace[4] + div + boardPlace[5] + "\n" + boardPlace[6] + div + boardPlace[7] + div + boardPlace[8];
+               System.out.println(board);
+               
+               // reset / next turn
+               player = nextTurn(player);
+               openSpot = false; 
+               
             // is there a winner yet??
             winner = checkWin(boardPlace);
             switch (winner) {
@@ -207,7 +261,6 @@ public class TicTacToe
          
       } while (playAgain == 1);
       
-      input.close();
    }
       
    
