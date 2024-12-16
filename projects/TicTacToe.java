@@ -180,9 +180,10 @@ public class TicTacToe
                      if (boardPlace[4] == "   ")
                      {
                         choice = 5; // tries to go to middle space
-                     } 
-                     choice = compTurn.nextInt(9) + 1; // random option
-                     if (boardPlace[choice - 1] == "   ") 
+                     } else {
+                        choice = compTurn.nextInt(9) + 1; // random option
+                     }
+                        if (boardPlace[choice - 1] == "   ") 
                         {
                         // true if there is a space, false if there is already an X / O there
                            openSpot = true;
