@@ -169,20 +169,27 @@ public class TicTacToe
                   // computer
                   turn = "computer is thinking . . .";
                   System.out.println(turn);
-                  
+                  try 
+                  {
+                     Thread.sleep(1000); // delay of 1 seconds / 1 milliseconds
+                  } catch (Exception e) {
+                     System.out.println("catch exception");
+                  }
                   while (!openSpot)
                   {
-                     choice = compTurn.nextInt(9) + 1;
+                     if (boardPlace[4] == "   ")
+                     {
+                        choice = 5; // tries to go to middle space
+                     } 
+                     choice = compTurn.nextInt(9) + 1; // random option
                      if (boardPlace[choice - 1] == "   ") 
                         {
                         // true if there is a space, false if there is already an X / O there
                            openSpot = true;
                         } else {
                            openSpot = false;
-                        }
-                     
-                  }
-                  
+                        }                     
+                  }                  
                } else {
                   System.out.println("ERROR IN COMPUTER'S TURN");
                }            
@@ -190,6 +197,7 @@ public class TicTacToe
                symbol = playSymbol(player); // determine which symbol will be placed
                // DEBUG : System.out.println("openSpot " + boardPlace[choice - 1] + symbol);
                boardPlace[choice - 1] = symbol;
+               
                // update board
                board = boardPlace[0] + div + boardPlace[1] + div + boardPlace[2] + "\n" + boardPlace[3] + div + boardPlace[4] + div + boardPlace[5] + "\n" + boardPlace[6] + div + boardPlace[7] + div + boardPlace[8];
                System.out.println(board);
