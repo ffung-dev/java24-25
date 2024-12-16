@@ -83,6 +83,7 @@ public class TicTacToe
          }
       } while (!validStart);
       
+      // prints out settings
       System.out.print(lineDiv);
       if (keepWins == 1)
       {
@@ -168,6 +169,7 @@ public class TicTacToe
                   // computer
                   turn = "computer is thinking . . .";
                   System.out.println(turn);
+                  
                   while (!openSpot)
                   {
                      choice = compTurn.nextInt(9) + 1;
@@ -260,7 +262,7 @@ public class TicTacToe
          boardPlace = newBoardPlace;
          
       } while (playAgain == 1);
-      
+      input.close();
    }
       
    
