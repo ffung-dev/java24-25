@@ -74,7 +74,8 @@ public class VigenereCipher
      char letter;
      final int lengthE = str.length();
      int shift;
-      
+      // System.out.println(shift + letter);
+
       for (int i = 0 ; i < lengthE ; i++)
       {
          shift = (int)(key.charAt(i)); // shift depends on the corresponding key letter
