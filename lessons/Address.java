@@ -49,7 +49,7 @@ public class Address
       full += streetAddress;
       full += ", " + city;
       full += ", " + state;
-      full += zip;
+      full += " " + zip;
       return full;
    }
    
