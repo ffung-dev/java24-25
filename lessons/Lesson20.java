@@ -71,6 +71,7 @@ public class Lesson20
             System.out.println("error: did not input valid option (1/0)");      
          }
       } while (!valid);
+      input.close();
    }
    
 }
