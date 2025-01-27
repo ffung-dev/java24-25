@@ -12,6 +12,8 @@ public class Lesson23
         System.out.println(newClue.toString());
         System.out.println(green.toString());
         System.out.println(scarlett.toString());
+        clue.hackAlarm();
+        System.out.println(clue.rob("scarlett red"));
         
 
     }
