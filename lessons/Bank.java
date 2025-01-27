@@ -39,7 +39,7 @@ public class Bank
    public String rob(String team) 
    {
         String result = "";
-        if (security) 
+        if (!security) 
         {
             result = team + " has successfully robbed " + name;
         } else {
