@@ -34,5 +34,15 @@ public class CustomerAccount {
     public void setBal(double bal) { this.bal = bal;}
     public void setAccountType(String accountType) { this.accountType = accountType; }
 
-    
+    // toString
+    public String toString()
+    {
+        String result = "";
+        result += "\nname: " + name;
+        result += "\naccount number: " + accountNum;
+        result += "\nid number: " + IDNum;
+        result += "\nbalance: " + bal;
+        result += "\naccount type: " + accountType;
+        return result; 
+    }    
 }
