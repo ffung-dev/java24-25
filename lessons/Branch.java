@@ -7,10 +7,11 @@
 public class Branch
 {
    // instance variables
-   String name;
-   String address;
-   int phone;
-   BankTeller teller;
+   private String name;
+   private String address;
+   private int phone;
+   private BankTeller teller;
+   private static int count = 0;
    
    // constructor
    public Branch(String name, String address, int phone, BankTeller teller)
@@ -19,6 +20,7 @@ public class Branch
       this.address = address;
       this.phone = phone;
       this.teller = teller;
+      count++;
    }
    
    // get methods
@@ -41,5 +43,11 @@ public class Branch
       result += "\nphone: " + phone;
       result += "\nteller: " + teller.toString();
       return result;
+   }
+   
+   // getCount
+   public static int getCount()
+   {
+      return count;
    }
 }
