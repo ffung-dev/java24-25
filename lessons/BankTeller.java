@@ -9,12 +9,14 @@ public class BankTeller
    // instance variable
    private String name;
    private String tellerID;
+   private static int count = 0;
    
    // constuctor
    public BankTeller(String name, String tellerID)
    {
       this.name = name;
       this.tellerID = tellerID;
+      count++;
    }
    
    // get methods
@@ -33,5 +35,27 @@ public class BankTeller
       result += "\nteller id: " + tellerID;
       return result;
    }
-
+   
+   // get balance of a customer account (class)
+   public double getBal(CustomerAccount account)
+   {
+      return account.getBal();
+   }
+   
+   // deposit to customer account
+   public void deposit(double amount, CustomerAccount account)
+   {
+      account.setBal(account.getBal() + amount);
+   }
+   
+   // withdraw from customer account
+   public void withdraw(double amount, CustomerAccount account)
+   {
+      account.setBal(account.getBal() - amount);
+   }
+   
+   public static int getCount()
+   {
+      return count;
+   }
 }  
