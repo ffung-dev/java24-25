@@ -1,4 +1,8 @@
 //*************************************************** 
+//    Lesson23.java        Author: Fiona Fung
+//
+// tests Bank, BankTeller, CustomerAccount, Branch
+//***************************************************
 public class Lesson23 
 {
     public static void main(String[]args)
@@ -15,6 +19,17 @@ public class Lesson23
         clue.hackAlarm();
         System.out.println(clue.rob("scarlett red"));
         
+        // lesson 24 - testing (BankTeller.java)
+        System.out.println(green.getBal(scarlett));
+        green.deposit(600.60, scarlett);
+        System.out.println(green.getBal(scarlett));
+        
+        // lesson 25 - testing (BankTeller.java)
+        System.out.println(BankTeller.getCount());
+        BankTeller plum = new BankTeller("Dr. Plum", "PROF0000");
+        Branch oldClue = new Branch ("Mansion Bank", "Mansion Blvd", 9002000, plum);
+        oldClue.setAddress("30 Mansion Blvd");
+        System.out.println(Branch.getCount());
 
     }
 }
