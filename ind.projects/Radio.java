@@ -12,6 +12,9 @@ public class Radio
         JFrame radio = new JFrame(" radio ");
         JLabel test = new JLabel(" < click me :) ");
         JPanel panel = new JPanel();
+        /* ImageIcon NAME = new ImageIcon(png?);
+         then put inside the button
+         */
         JButton button = new JButton(" play music ");
         // radio.add(test);
         radio.add(panel);
