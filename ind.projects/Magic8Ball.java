@@ -7,11 +7,23 @@ public class Magic8Ball
     {
         Scanner input = new Scanner(System.in);
         Random generator = new Random();
+        int choice;
 
+        // shake magic 8 ball
+        System.out.println("shaking magic 8 ball...");
+        try 
+        {
+            Thread.sleep(1000); // delay of 1 seconds / 1 milliseconds
+        } catch (Exception e) {
+             System.out.println("catch exception");
+        }
+        choice = generator.nextInt(21); // 0-20
+        System.out.println(answer(choice));
+        
         input.close();
     }
 
-    public String answer(int choice)
+    public static String answer(int choice)
     {
         String answer = "";
         switch(choice) {
