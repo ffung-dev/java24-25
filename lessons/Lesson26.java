@@ -56,5 +56,7 @@ public class Lesson26
       }
       distance = (double)Math.sqrt(sum);
       System.out.println("Euclidean distance of vectors 1 and 2: " + distance);
+
+      input.close();
    }
 }
