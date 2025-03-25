@@ -8,7 +8,7 @@ public class Magic8Ball
         Scanner input = new Scanner(System.in);
         Random generator = new Random();
         int choice;
-
+        
         // shake magic 8 ball
         System.out.println("shaking magic 8 ball...");
         try 
@@ -19,7 +19,7 @@ public class Magic8Ball
         }
         choice = generator.nextInt(21); // 0-20
         System.out.println(answer(choice));
-        
+
         input.close();
     }
 
