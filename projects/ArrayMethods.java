@@ -73,7 +73,7 @@ public class ArrayMethods
 
       } while (tryAgain);
       
-      
+      input.close();
    }
    
    // takes an array and returns it as a string
