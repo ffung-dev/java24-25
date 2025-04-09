@@ -71,6 +71,9 @@ public class MatrixMethods
          } else if (choice == 2) {
             // averageOfRows
             System.out.println("average of all rows : " + averageOfRows(array));
+         } else if (choice == 3) {
+            // largestRow
+            System.out.println("the largest row is row " + largestRow(array));
          }
          // asks user if they want to try again
          boolean choseOpt = false; 
@@ -94,6 +97,8 @@ public class MatrixMethods
             }
          }
       } while (tryAgain); // repeats if user inputs 1 (yes)
+
+      input.close();
    }
    
    // returns array as a string
@@ -135,7 +140,16 @@ public class MatrixMethods
    public static int largestRow(int[][] arr)
    {
       int largestRow = 0;
-      
+      int sum = sumOfRow(arr, 0); // initial sum of row 0
+      // compares sums of each row
+      for (int count = 0 ; count < arr.length ; count++)
+      {
+         if (sumOfRow(arr, count) > sum)
+         {
+            sum = sumOfRow(arr, count); // updates sum
+            largestRow = count; // updates largest row
+         }
+      }
       return largestRow;
    }
 }
