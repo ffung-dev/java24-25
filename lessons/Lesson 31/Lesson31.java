@@ -22,8 +22,8 @@ public class Lesson31
       JFrame frame = new JFrame("Lesson 31");
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       // create icons & labels
-      ImageIcon pIcon = new ImageIcon("pancham-card.jpg");
-      ImageIcon aIcon = new ImageIcon("alcremie-card.png");
+      ImageIcon pIcon = new ImageIcon("pancham.jpg");
+      ImageIcon aIcon = new ImageIcon("alcremie.png");
       JLabel pLabel = new JLabel("pancham", pIcon, SwingConstants.CENTER);
       JLabel aLabel = new JLabel("alcremie", aIcon, SwingConstants.CENTER);
       aLabel.setHorizontalTextPosition (SwingConstants.CENTER);
