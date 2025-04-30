@@ -31,6 +31,7 @@ public class Lesson32Panel extends JPanel
         // field info
         field = new JTextField(7);
         field.addActionListener(new ButtonListener());
+        field.setHorizontalAlignment(SwingConstants.CENTER);
 
         // add labels and field to panel
         add(topLabel);
