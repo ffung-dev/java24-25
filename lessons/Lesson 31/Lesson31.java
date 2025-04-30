@@ -12,8 +12,6 @@
 */
 // import packages
 import java.awt.*;
-import java.io.File;
-
 import javax.swing.*;
 
 public class Lesson31
