@@ -1,5 +1,5 @@
 //*************************************************************
-//    AboutMePanel.java       Author: Fiona Fung
+//    AboutMeFavPanel.java       Author: Fiona Fung
 //
 //    stores panel information for AboutMe.java
 //*************************************************************
@@ -9,7 +9,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class AboutMePanel extends JPanel
+public class AboutMeFavPanel extends JPanel
 {
-
+   public AboutMeFavPanel()
+   {
+      
+   }
 }

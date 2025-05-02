@@ -21,9 +21,14 @@ public class AboutMe
       JFrame frame = new JFrame();
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       
-      // create instance of panel (see AboutMePanel.java)
-      AboutMePanel panel = new AboutMePanel();
+      JPanel layoutPanel = new JPanel(new CardLayout());
       
+      // create instance of panels (AboutMeFavPanel, AboutMeHiPanel
+      AboutMeFavPanel favPanel = new AboutMeFavPanel();
+      AboutMeHiPanel hiPanel = new AboutMeHiPanel();
+      
+      layoutPanel.add(hiPanel, "hi there");
+      layoutPanel.add(favPanel, "my favorite things");
       // add into frame + show 
       frame.getContentPane().add(panel);
       frame.pack();
