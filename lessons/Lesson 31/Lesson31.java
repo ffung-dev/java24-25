@@ -24,6 +24,7 @@ public class Lesson31
       // create icons & labels
       ImageIcon pIcon = new ImageIcon("pancham.jpg");
       ImageIcon aIcon = new ImageIcon("alcremie.png");
+      System.out.println(aIcon);
       JLabel pLabel = new JLabel("pancham", pIcon, SwingConstants.CENTER);
       JLabel aLabel = new JLabel("alcremie", aIcon, SwingConstants.CENTER);
       aLabel.setHorizontalTextPosition (SwingConstants.CENTER);
