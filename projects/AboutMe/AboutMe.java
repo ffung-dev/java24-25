@@ -6,6 +6,8 @@
 
 import java.util.*;
 import javax.swing.JFrame;
+import javax.swing.*;
+import java.awt.* ;
 
 public class AboutMe
 {
@@ -17,19 +19,17 @@ public class AboutMe
       } catch (Exception e) {
          e.printStackTrace();
       }
+      
       // create frame
-      JFrame frame = new JFrame();
+      JFrame frame = new JFrame("who am i ?");
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       
-      JPanel layoutPanel = new JPanel(new CardLayout());
+      // create instance of panel
+      AboutMePanel panel = new AboutMePanel();
+     
       
-      // create instance of panels (AboutMeFavPanel, AboutMeHiPanel
-      AboutMeFavPanel favPanel = new AboutMeFavPanel();
-      AboutMeHiPanel hiPanel = new AboutMeHiPanel();
-      
-      layoutPanel.add(hiPanel, "hi there");
-      layoutPanel.add(favPanel, "my favorite things");
       // add into frame + show 
+      // frame.setResizable(false);
       frame.getContentPane().add(panel);
       frame.pack();
       frame.setVisible(true);
