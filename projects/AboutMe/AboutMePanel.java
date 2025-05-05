@@ -8,6 +8,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Random;
 
 public class AboutMePanel extends JPanel
 {
@@ -21,7 +22,6 @@ public class AboutMePanel extends JPanel
       setLayout(new BorderLayout());
       // custom colors
       Color lightPink = new Color(250, 225, 232);
-      Color darkPink = new Color(79, 47, 57);
       Color lightYellow = new Color(252, 248, 237);
       Color brown = new Color(128, 88, 78);
       
@@ -38,8 +38,8 @@ public class AboutMePanel extends JPanel
          button[i] = new JButton(buttonNames[i]);
          button[i].addActionListener(new ButtonListener());
          button[i].setHorizontalTextPosition(SwingConstants.LEFT);
-         button[i].setBackground(Color.white);
-         button[i].setForeground(darkPink);
+         button[i].setBackground(pickLightColor(i));
+         button[i].setForeground(pickDarkColor(i));
          button[i].setFont(fontS);
          // button[i].setBorder(BorderFactory.createLineBorder(darkPink));
       } 
@@ -71,6 +71,9 @@ public class AboutMePanel extends JPanel
       answerLabel = new JLabel("- - -");
       answerLabel.setFont(fontB);
       answerLabel.setForeground(brown);
+      answerLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+      answerLabel.setVerticalTextPosition(JLabel.TOP);
+
       answerPanel.add(answerLabel);
       
       // AboutMePanel
@@ -87,8 +90,8 @@ public class AboutMePanel extends JPanel
    private class ButtonListener implements ActionListener
    {
       // answers to the button prompts
-      ImageIcon fries = new ImageIcon("fries.jpg");
-      String[] answers = {"fiona" , "#ede9f7 or periwinkle", "giraffes" + fries, "any form of potatoes", "<html>baking, <br>crocheting, <br>reading</html>" , "october 17"};
+      ImageIcon giraffeIcon = new ImageIcon("giraffeIcon.png");
+      String[] answers = {"fiona" , "<html>periwinkle<br>(or #ede9f7)</html>", "giraffes", "any form of potatoes", "<html>baking, <br>crocheting, <br>reading</html>" , "october 17"};
       public void actionPerformed(ActionEvent event)
       {
          String labelText = answerLabel.getText();
@@ -96,19 +99,68 @@ public class AboutMePanel extends JPanel
          if (event.getSource() == button[0] )
          {
             labelText = answers[0];
+            answerLabel.setIcon(null);
          } else if (event.getSource() == button[1] ) {
             labelText = answers[1];
+            answerLabel.setIcon(null);
          } else if (event.getSource() == button[2] ) {
             labelText = answers[2];
+            answerLabel.setIcon(giraffeIcon);
          } else if (event.getSource() == button[3] ) {
             labelText = answers[3];
+            answerLabel.setIcon(null);
          } else if (event.getSource() == button[4] ) {
             labelText = answers[4];
+            answerLabel.setIcon(null);
          } else if (event.getSource() == button[5] ) {
             labelText = answers[5];
+            answerLabel.setIcon(null);
          }
          // update answer in panel
          answerLabel.setText(labelText);
       }
    }
+   
+   // methods to pick color of text/background (i depends on the button)
+    private Color pickDarkColor(int i)
+    {
+      Color result = new Color(0, 0, 0);
+      if (i == 5)
+      {
+         result = new Color(38, 29, 18 );
+      } else if (i == 4) {
+         result = new Color(38, 28, 51 );
+      } else if (i == 0) {
+         result = new Color(38, 18, 30 );
+      } else if (i == 1) {
+         result = new Color(43, 38, 26 );
+      } else if (i == 2) {
+         result = new Color(25, 33, 22 );
+      } else if (i == 3) {
+         result = new Color(22, 30, 36 );
+      } 
+      return result;
+    }
+    private Color pickLightColor(int i)
+    {
+      Color result = new Color(0, 0, 0);
+      if (i == 5)
+      {
+         result = new Color(247, 241, 233);
+      } else if (i == 4) {
+         result = new Color(240, 233, 247 );
+      } else if (i == 0) {
+         result = new Color(247, 234, 233);
+      } else if (i == 1) {
+         result = new Color(247, 247, 223 );
+      } else if (i == 2) {
+         result = new Color(229, 245, 228 );
+      } else if (i == 3) {
+         result = new Color(235, 236, 245 );
+      } 
+      return result;
+    
+    } 
+
+
 }

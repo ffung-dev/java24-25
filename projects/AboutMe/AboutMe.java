@@ -1,7 +1,7 @@
 //**************************************************************
 //    AboutMe.java         Author: Fiona Fung
 //
-//
+// implementing java gui to make an about me program
 //**************************************************************
 
 import java.util.*;
@@ -26,13 +26,13 @@ public class AboutMe
       
       // create instance of panel
       AboutMePanel panel = new AboutMePanel();
-     
-      
+           
       // add into frame + show 
-      // frame.setResizable(false);
+      frame.setResizable(false);
       frame.getContentPane().add(panel);
       frame.pack();
       frame.setVisible(true);
    
    }
+   
 }
