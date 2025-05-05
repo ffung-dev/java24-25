@@ -49,6 +49,7 @@ public class AboutMePanel extends JPanel
       JLabel topText = new JLabel("about me");
       topText.setHorizontalTextPosition(SwingConstants.CENTER);
       topText.setForeground(Color.white);
+      topText.setFont(fontB);
       topPanel.setBackground(brown);
       topPanel.add(topText);
       
