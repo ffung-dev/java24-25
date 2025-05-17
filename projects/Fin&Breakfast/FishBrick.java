@@ -5,11 +5,12 @@
 //*********************************************************************
 
 import javax.swing.*;
+
 public class FishBrick
 {
-   int fishX;
-   int fishY;
-   String fishImage;
+   private int fishX;
+   private int fishY;
+   private String fishImage;
    
    public FishBrick(String image, int row, int col)
    {
@@ -26,8 +27,8 @@ public class FishBrick
    // getImage returns the png name
    public ImageIcon getImage() { return new ImageIcon(fishImage) ; }
    
-   // set methods 
+   /* set methods 
    public void setX(int x) { fishX = x; }
    public void setY(int y) { fishY = y; }
-   
+   */
 }

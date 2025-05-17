@@ -32,5 +32,15 @@ public class FinAndBreakfastPanel extends JPanel
 
    
    }
+   
+   // draw side backgrounds
+   public void paintComponent(Graphics g)
+   {
+      ImageIcon sideBG = new ImageIcon("sidebg.png");
+      super.paintComponent(g);
+      g.drawImage(sideBG.getImage(), 0 , 0 , null);
+      g.drawImage(sideBG.getImage(), 762 , 0, null);
+      
+   }
 
 }

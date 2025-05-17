@@ -13,14 +13,22 @@ import java.util.Random;
 
 public class GamePanel extends JPanel
 { 
-   //ball movement variables
+   // ball movement variables
    int ballX = 255;
    int ballY = 560;
-   int ballX_velocity = 5;
-   int ballY_velocity = 5;
-   FishBrick[] bricks = new FishBrick[42]; // 42 bricks
-   int rows = 7;
-   int columns = 6;
+   int ballX_velocity = 4;
+   int ballY_velocity = 4;
+   
+   // paddle movement variables
+   int paddleX = 190;
+   int paddleY = 600;
+   int paddleX_velocity = 10; 
+   boolean leftPress, rightPress;
+   Paddle paddle;
+   // 2d array
+   final int rows = 7;
+   final int columns = 6;
+   FishBrick[][] bricks = new FishBrick[rows][columns]; // 42 bricks in 7 rows and 6 columns
    
    public GamePanel()
    {
@@ -28,22 +36,26 @@ public class GamePanel extends JPanel
       setBounds(0, 0, 524, 650);
       int brickNum = 0;   
        
-      for (int r = 0 ; r < rows ; r++)
+      for (int r = 0 ; r < bricks.length ; r++)
       {
-         for (int c = 0 ; c < columns ; c++)
+         for (int c = 0 ; c < bricks[r].length ; c++)
          {
-            // create brick
-            bricks[brickNum] = new FishBrick(RandomFish(), r, c);
+            // create brick (randomize color)
+            bricks[r][c] = new FishBrick(RandomFish(), r, c);
             brickNum++;
+            // testing : System.out.println(r +" " + c);
+
          }
-      }
-            
-            
+      }      
       // swingTimer
       int delay = 10; // updates every 10 milliseconds
       Timer timer = new Timer(delay, new TimerListener());
       timer.start();           
-               
+      
+      paddle = new Paddle(paddleX , paddleY , paddleX_velocity);
+      // detect keyboard press
+      setFocusable(true); 
+      addKeyListener(new ArrowListener());       
    }
    
    // game animation
@@ -52,21 +64,30 @@ public class GamePanel extends JPanel
       super.paintComponent(g);
       setBackground(new Color(179, 206, 225)); // background of panel
       
+      // draw paddle
+      if (leftPress)
+      {
+         paddle.moveLeft();
+      }
+      if (rightPress)
+      {
+         paddle.moveRight();
+      }
+      paddle.draw(g);
       // draw ball
       g.setColor(Color.white);
       ballX += ballX_velocity;
       ballY += ballY_velocity;
       g.fillOval(ballX, ballY, 25, 25);
-            
       // draw bricks
       int brickNum = 0;
 
-      for (int r = 0 ; r < rows ; r++)
+      for (int r = 0 ; r < bricks.length ; r++)
       {
-         for (int c = 0 ; c < columns ; c++)
+         for (int c = 0 ; c < bricks[r].length ; c++)
          {
             // draw
-            g.drawImage(bricks[brickNum].getImage().getImage(), bricks[brickNum].getX(), bricks[brickNum].getY(),null);
+            g.drawImage(bricks[r][c].getImage().getImage(), bricks[r][c].getX(), bricks[r][c].getY(),null);
             brickNum++;
          }
       }
@@ -76,19 +97,36 @@ public class GamePanel extends JPanel
    private class ArrowListener implements KeyListener
    {
       public void keyTyped(KeyEvent e) { } // nothing done here
-      
+      public void keyReleased(KeyEvent e) 
+      { 
+         if (e.getKeyCode() == KeyEvent.VK_RIGHT )
+         { // right arrow released
+            rightPress = false;
+         } 
+         if (e.getKeyCode() == KeyEvent.VK_LEFT ) 
+         { // left arrow pressed
+            leftPress = false;
+         }
+
+      }
+
       public void keyPressed(KeyEvent e)
       {
-      
-      }
-      
-      public void keyReleased(KeyEvent e)
-      {
-      
+         if (e.getKeyCode() == KeyEvent.VK_RIGHT )
+         { // right arrow pressed
+            rightPress = true; 
+            System.out.println("right");
+         } 
+         if (e.getKeyCode() == KeyEvent.VK_LEFT ) 
+         { // left arrow pressed
+            leftPress = true;
+            //System.out.println("left");
+         }
+         repaint();
       }
    }
    
-   // timer ActionListener
+   // timer ActionListener: ball movement
    private class TimerListener implements ActionListener
    {
       public void actionPerformed(ActionEvent e)
@@ -111,9 +149,10 @@ public class GamePanel extends JPanel
          {
             ballY_velocity = -ballY_velocity;
          }
-         
+         /* testing 
          System.out.println("x: " + ballX_velocity);
          System.out.println("y: " + ballY_velocity);
+         */
          repaint();
       }
    }
