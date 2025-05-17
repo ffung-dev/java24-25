@@ -4,10 +4,8 @@
 // implementing java gui to make an about me program
 //**************************************************************
 
-import java.util.*;
 import javax.swing.JFrame;
 import javax.swing.*;
-import java.awt.* ;
 
 public class AboutMe
 {

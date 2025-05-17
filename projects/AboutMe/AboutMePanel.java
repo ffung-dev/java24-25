@@ -8,12 +8,10 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Random;
 
 public class AboutMePanel extends JPanel
 {
    // create buttons and label
-   private JButton nameButton, colorButton, animalButton, foodButton, hobbyButton, bdayButton;
    private JLabel answerLabel;
    final JButton[] button;
          
