@@ -13,49 +13,60 @@ import java.util.Random;
 
 public class GamePanel extends JPanel
 { 
+   // panel stats
+   final int g_panelW = 524;
+   final int g_panelH = 650;
+   
    // ball movement variables
-   int ballX = 255;
+   int ballX = 240;
    int ballY = 560;
    int ballX_velocity = 4;
    int ballY_velocity = 4;
+   final int g_ballDiameter = 25;
    
    // paddle movement variables
-   int paddleX = 190;
-   int paddleY = 600;
-   int paddleX_velocity = 10; 
-   boolean leftPress, rightPress;
-   Paddle paddle;
+   private int paddleX = 190;
+   private int paddleY = 600;
+   private int paddleX_velocity = 10; 
+   private boolean leftPress, rightPress;
+   private Paddle paddle;
+   private final int g_PaddleWidth = 150;
+   private final int g_paddleHeight = 30;
+   
    // 2d array
-   final int rows = 7;
-   final int columns = 6;
-   FishBrick[][] bricks = new FishBrick[rows][columns]; // 42 bricks in 7 rows and 6 columns
+   private final int rows = 7;
+   private final int columns = 6;
+   private final int g_brickWidth = 83;
+   private final int g_brickHeight = 35;
+   private FishBrick[][] bricks = new FishBrick[rows][columns]; // 42 bricks in 7 rows and 6 columns
+  
+   // timer to begin
+   private int delay = 10; // updates every 10 milliseconds
+   private Timer timer = new Timer(delay, new TimerListener());
+   // game on / off / win / lose
+   private boolean playing, win;
+   private int score = 0 ;
    
    public GamePanel()
    {
       setLayout(null);
-      setBounds(0, 0, 524, 650);
-      int brickNum = 0;   
-       
+      setBounds(0, 0, 524, 650);   
+      playing = false;
+      
+      paddle = new Paddle(paddleX , paddleY , paddleX_velocity);
+      // detect keyboard press
+      setFocusable(true); 
+      addKeyListener(new ArrowListener());
+      
       for (int r = 0 ; r < bricks.length ; r++)
       {
          for (int c = 0 ; c < bricks[r].length ; c++)
          {
             // create brick (randomize color)
-            bricks[r][c] = new FishBrick(RandomFish(), r, c);
-            brickNum++;
+            bricks[r][c] = new FishBrick(RandomFish(), r, c, 1); // all bricks are not hit at first
             // testing : System.out.println(r +" " + c);
-
          }
-      }      
-      // swingTimer
-      int delay = 10; // updates every 10 milliseconds
-      Timer timer = new Timer(delay, new TimerListener());
-      timer.start();           
-      
-      paddle = new Paddle(paddleX , paddleY , paddleX_velocity);
-      // detect keyboard press
-      setFocusable(true); 
-      addKeyListener(new ArrowListener());       
+      }             
    }
    
    // game animation
@@ -74,23 +85,24 @@ public class GamePanel extends JPanel
          paddle.moveRight();
       }
       paddle.draw(g);
+      
+      // draw bricks      
+      for (int r = 0 ; r < bricks.length ; r++)
+      {
+         for (int c = 0 ; c < bricks[r].length ; c++)
+         {
+            if (bricks[r][c].getHit() == 1)
+            {
+               // draw if not hit
+               g.drawImage(bricks[r][c].getImage().getImage(), bricks[r][c].getX(), bricks[r][c].getY(),null);
+            } else { } // do not draw
+         }
+      }
       // draw ball
       g.setColor(Color.white);
       ballX += ballX_velocity;
       ballY += ballY_velocity;
       g.fillOval(ballX, ballY, 25, 25);
-      // draw bricks
-      int brickNum = 0;
-
-      for (int r = 0 ; r < bricks.length ; r++)
-      {
-         for (int c = 0 ; c < bricks[r].length ; c++)
-         {
-            // draw
-            g.drawImage(bricks[r][c].getImage().getImage(), bricks[r][c].getX(), bricks[r][c].getY(),null);
-            brickNum++;
-         }
-      }
    }
 
    // detects left/right keys pressed to move iceberg paddle   
@@ -112,15 +124,20 @@ public class GamePanel extends JPanel
 
       public void keyPressed(KeyEvent e)
       {
-         if (e.getKeyCode() == KeyEvent.VK_RIGHT )
+         if ((e.getKeyCode() == KeyEvent.VK_UP) && !playing ) 
+         {  // begin game & launch ball
+            playing = false;
+            playing = true;
+            timer.start();
+         }
+
+         if ((e.getKeyCode() == KeyEvent.VK_RIGHT) && playing )
          { // right arrow pressed
             rightPress = true; 
-            System.out.println("right");
          } 
-         if (e.getKeyCode() == KeyEvent.VK_LEFT ) 
+         if ((e.getKeyCode() == KeyEvent.VK_LEFT) && playing) 
          { // left arrow pressed
             leftPress = true;
-            //System.out.println("left");
          }
          repaint();
       }
@@ -131,32 +148,83 @@ public class GamePanel extends JPanel
    {
       public void actionPerformed(ActionEvent e)
       {
-         // bounce off left/right walls
-         if (ballX < 1)
+         // X VALUE bounce
+         if (ballX <= 0 || ballX >= g_panelW - g_ballDiameter )
          {
             ballX_velocity = -ballX_velocity;
          }
-         if (ballX > 500)
-         {
-            ballX_velocity = -ballX_velocity;
-         }
-         // bounce off bottom/top walls
-         if (ballY < 1)
-         {
+         
+         // Y VALUES
+         if (ballY+g_ballDiameter >= paddleY && paddleCollision(ballX)) {
+            // detect ball-paddle collision 
+            System.out.println("y collision");
             ballY_velocity = -ballY_velocity;
-         }
-         if (ballY > 630)
-         {
+            
+         } else if( ballY >= paddleY ) {
+            // passed paddle = lose
+            System.out.println("game over!") ; 
+                 
+         } else if (fishCollision(ballX, ballY) ) {
+            // true: increase score // in function: brick removed, bounced off
+           score += 10; 
+           
+         } else if (ballY <= 0 ) {
+            // bounce of top wall
             ballY_velocity = -ballY_velocity;
-         }
-         /* testing 
-         System.out.println("x: " + ballX_velocity);
-         System.out.println("y: " + ballY_velocity);
-         */
+         } 
          repaint();
       }
    }
-      
+   
+   // determine if the ball hits a fish-brick
+   public boolean fishCollision(int bX, int bY) 
+   {
+      boolean result = false;
+      // loop through all fish bricks
+      outer: 
+      for (int r = 0 ; r < bricks.length ; r++)
+      {
+         for (int c = 0 ; c < bricks[r].length ; c++)
+         {
+            // if brick is available
+            if (bricks[r][c].getHit() == 1)
+            {
+               // detect intersection
+               Rectangle ballRect = new Rectangle(bX, bY, g_ballDiameter, g_ballDiameter);
+               Rectangle brickRect = new Rectangle(bricks[r][c].getX(), bricks[r][c].getY(), g_brickWidth, g_brickHeight);
+               if (ballRect.intersects(brickRect)) // ball hits brick!
+               {
+                  result = true;
+                  bricks[r][c].setHit(0);
+                  // bounced off side or top or bottom of brick?
+                  if (ballX + g_ballDiameter >= bricks[r][c].getX() || ballX <= bricks[r][c].getX())
+                  {     // ball hits the side
+                     ballX_velocity = -ballX_velocity;
+                  } else {
+                        // ball hits top or bottom
+                     ballY_velocity = -ballY_velocity;
+                  }
+                  break outer;
+               }
+            // brick already hit
+            } else {
+               result = false;
+            }
+         }
+      }
+      return result;
+   }
+   
+   public boolean paddleCollision(int ballX) //, int objectX, int objectY)
+   {
+      /* if (ballX > paddle.getX() && ballX < (paddle.getX() + g_PaddleWidth))
+      {   
+         return true ; 
+      } else { 
+         return false;
+      } */
+      return (new Rectangle(ballX, ballY, 25, 25).intersects(new Rectangle(paddle.getX(), paddle.getY(), g_PaddleWidth, g_paddleHeight)));
+   }
    // pick the fish to draw in a brick
    public String RandomFish()
    {
