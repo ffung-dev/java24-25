@@ -1,7 +1,7 @@
 //***************************************************************
 //    FinAndBreakfastPanel.java          Author: Fiona Fung
 //
-//    
+//    holds game, start/end screens, etc.
 //***************************************************************
 
 // import packages

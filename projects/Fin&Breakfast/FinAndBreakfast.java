@@ -5,10 +5,7 @@
 //    used with FishBrick, FinAndBreakfastPanel
 //***************************************************************
 
-import java.awt.*;
 import javax.swing.*;
-
-
 public class FinAndBreakfast
 {
    public static void main (String[] args)
