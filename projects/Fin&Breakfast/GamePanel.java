@@ -41,6 +41,11 @@ public class GamePanel extends JPanel
    private final int g_brickHeight = 35;
    private FishBrick[][] bricks = new FishBrick[rows][columns]; // 42 bricks in 7 rows and 6 columns
   
+   // scrolling parallax background
+   ImageIcon mainBG = new ImageIcon("mainbg.png");
+   int bgX = 0;
+   int bgY = 0;
+   
    // timer to begin
    private int delay = 10; // updates every 10 milliseconds
    private Timer timer = new Timer(delay, new TimerListener());
@@ -77,6 +82,8 @@ public class GamePanel extends JPanel
    {
       super.paintComponent(g);
       setBackground(new Color(179, 206, 225)); // background of panel
+      // draw background (and move it constantly)
+      g.drawImage(mainBG.getImage(), bgX, bgY, null);
       
       // draw paddle
       if (leftPress)
