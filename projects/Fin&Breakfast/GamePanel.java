@@ -61,7 +61,7 @@ public class GamePanel extends JPanel
       setBounds(0, 0, g_panelW, g_panelH);   
       playing = false;
       
-      paddle = new Paddle(paddleX , paddleY , paddleX_velocity);
+      paddle = new Paddle(paddleX , paddleY, paddleX_velocity);
       // detect keyboard press
       setFocusable(true); 
       addKeyListener(new ArrowListener());
