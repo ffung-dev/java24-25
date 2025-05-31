@@ -44,6 +44,7 @@ public class GamePanel extends JPanel
    // scrolling parallax background
    ImageIcon mainBG1 = new ImageIcon("mainbg.png");
    ImageIcon mainBG2 = new ImageIcon("mainbg.png");
+   private Timer bgTimer = new Timer(30, new BackgroundTimerListener());
    int g_bgWidth = 524;
    int bg1X = 0;
    int bg2X = bg1X - g_bgWidth;
@@ -87,14 +88,8 @@ public class GamePanel extends JPanel
       setBackground(new Color(179, 206, 225)); // background of panel
       
       // draw background (and move it constantly)
-      if (bg1X > g_bgWidth)
-      {  // passes end of screen
-         bg1X = 0;
-      }
       g.drawImage(mainBG1.getImage(), bg1X, bgY, null);
       g.drawImage(mainBG2.getImage(), bg1X - g_bgWidth, bgY, null);
-      bg1X += 1;
-      bg2X = bg1X - g_bgWidth;
     
       // draw paddle
       if (leftPress)
@@ -154,6 +149,7 @@ public class GamePanel extends JPanel
          {  // begin game & launch ball
             playing = true;
             timer.start();
+            bgTimer.start();
          }
 
          if ((e.getKeyCode() == KeyEvent.VK_RIGHT) && playing )
@@ -197,6 +193,21 @@ public class GamePanel extends JPanel
             ballY_velocity = -ballY_velocity;
          } 
          repaint();
+      }
+   }
+   
+   // timer ActionListener : move background
+   private class BackgroundTimerListener implements ActionListener
+   {
+      public void actionPerformed(ActionEvent e)
+      {
+         if (bg1X > g_bgWidth)
+         {  // passes end of screen
+            bg1X = 0;
+         }
+         bg1X += 1;
+         bg2X = bg1X - g_bgWidth;
+         
       }
    }
    
