@@ -78,7 +78,7 @@ public class GamePanel extends JPanel
             bricks[r][c] = new FishBrick(RandomFish(), r, c, 1); // all bricks are not hit at first
             // testing : System.out.println(r +" " + c);
          }
-      }             
+      }     
    }
    
    // game animation
