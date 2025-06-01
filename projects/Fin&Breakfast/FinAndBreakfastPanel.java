@@ -11,6 +11,10 @@ import java.awt.event.*;
 
 public class FinAndBreakfastPanel extends JPanel
 {
+   JPanel container = new JPanel();
+   JPanel howToPanel = new JPanel(); 
+   GamePanel gameplayPanel = new GamePanel();
+
    // the panel itself
    public FinAndBreakfastPanel()
    {
@@ -19,18 +23,21 @@ public class FinAndBreakfastPanel extends JPanel
       setPreferredSize(new Dimension(1000, 650));
       
       // container panel for gameplay, start/end screens
-      JPanel container = new JPanel();
       container.setLayout(null);
       container.setBounds(238, 0, 524, 650);
       container.setBackground(Color.white);
       
+      // howTo panel
+      howToPanel.setBounds(0, 0, 474, 230);
+      howToPanel.setBackground(Color.red);
+      howToPanel.setVisible(true);
+      howToPanel.setLayout(null);
+      JButton xButton = new JButton("x");
+      howToPanel.add(xButton);
+      
       // gameplay panel
-      GamePanel gameplayPanel = new GamePanel();
       container.add(gameplayPanel);
-      //test gameplayPanel.setVisible(false);
       add(container);
-
-   
    }
    
    // draw side backgrounds
