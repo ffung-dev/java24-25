@@ -49,4 +49,13 @@ public class Music
       clip.setMicrosecondPosition(currentFrame); 
       this.play();
    }
+   
+   // reset audio stream (go back to specific line in audio)
+   public void resetAudioStream()
+   throws UnsupportedAudioFileException,IOException,LineUnavailableException
+   {
+      audioInputStream = AudioSystem.getAudioInputStream(new File(filePath).getAbsoluteFile());
+      clip.open(audioInputStream); // specific part
+      clip.loop(Clip.LOOP_CONTINUOUSLY);  
+   }
 }
